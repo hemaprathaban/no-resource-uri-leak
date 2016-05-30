@@ -1,0 +1,47 @@
+# -*- mode: sh; coding: utf-8; tab-width: 4 -*-
+# vim: ts=4 noet ai ft=sh
+
+# No Resource URI Leak
+#
+# Copyright © 2016  Desktopd Project
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+addon_id="no-resource-uri-leak"
+
+# Canonical version of the addon (may be converted into different formats on build)
+addon_version="0.1.0"
+
+# Alpha versions (may not be feature complete): x.y.z~a1, x.y.z~a2, ...
+# Beta versions (feature-frozen): x.y.z~b1, x.y.z~b2, ...
+# 1.1.0 > 1.0.1 > 1.0.1~b1 > 1.0.1~a2 > 1.0.1~a1 > 1.0.0
+
+# 'alpha', 'beta', or 'stable'
+addon_release_phase="stable"
+
+addon_name="No Resource URI Leak"
+addon_author="Desktopd Project"
+addon_license_id='GPL-3.0+'
+
+addon_description="Deny resource:// access to Web content: We fill the hole to defend against fingerprinting. Very important to Firefox privacy. A direct workaround for bugzil.la/863246"
+
+addon_website_uri="https://notabug.org/desktopd/no-resource-uri-leak"
+
+
+addon_src_dir=src
+addon_main_path=main.js
+
+addon_support_private_browsing=1
+

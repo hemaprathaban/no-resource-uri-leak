@@ -1,0 +1,3 @@
+[submodule "tools/jpm.sh"]
+	path = tools/jpm.sh
+	url = https://notabug.org/desktopd/jpm.sh

@@ -1,0 +1,6 @@
+*~
+*.log
+*.xpi
+builds/**
+/src/icon.png
+/src/icon64.png
