@@ -45,3 +45,6 @@ addon_main_path=main.js
 
 addon_support_private_browsing=1
 
+addon_fennec_version='>=38.0a1'
+addon_thunderbird_version='>=38.0'
+addon_seamonkey_version='>=2.38'
