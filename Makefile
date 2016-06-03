@@ -119,3 +119,8 @@ distclean: clean
 		$(src_dir)/icon.png $(src_dir)/icon64.png
 	rm -f $(api_docs_path)
 
+
+install: debian-install
+debian-install: $(addon_path)
+	@echo "The 'install' target is only for Debian packaging!"
+	install-xpi $(addon_path)/*.xpi
