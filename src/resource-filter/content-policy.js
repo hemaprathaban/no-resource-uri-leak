@@ -29,8 +29,10 @@ const policy = {__proto__: null
   
   /* nsIContentPolicy */
   ,shouldLoad (typeCode, uri, originUri, node, expectedMime, extra, principal) {
+    // Note: view-source: scheme is no longer accessible from content (thus no leaks)
     if (!uri || !uri.schemeIs ('resource') || !originUri
-      || originUri.schemeIs ('chrome') || originUri.schemeIs ('resource')) {
+      || originUri.schemeIs ('chrome') || originUri.schemeIs ('resource')
+      || originUri.schemeIs ('view-source')) {
       
       if (allowChromeURIs || !uri.schemeIs ('chrome')) {
         return Ci.nsIContentPolicy.ACCEPT;
