@@ -1,0 +1,9 @@
+[
+	{
+		"name": "blockChromeURIs"
+		,"type": "bool"
+		,"value": false
+		,"title": "Block Web-exposed subset of chrome:// URIs"
+		,"description": "Enabling it may break certain extensions or badly designed Web sites. (Requires a restart)"
+	}
+]

@@ -8,16 +8,18 @@
 /**
   Prevents content from loading resource:// URIs without breaking add-ons.
   @param resourceDomain (optional) e.g. 'gre' for resource://gre/
+  @param blockChromeURIs (optional) set to block chrome:// resources
 */
-exports.addFilter = resourceDomain => {
+exports.addFilter = (resourceDomain, blockChromeURIs) => {
   try {
     const {processes, remoteRequire} = require ('sdk/remote/parent');
     remoteRequire ('./content-policy', module);
-  
+    
     // For every current and future process
-    processes.forEvery (process => void process.port.emit ('init', resourceDomain));
+    processes.forEvery (process => void process.port.emit ('init'
+        , {resourceDomain, blockChromeURIs}));
   } catch (e) {
     // Not multiprocess
-    require ('./content-policy').init (resourceDomain);
+    require ('./content-policy').init ({resourceDomain, blockChromeURIs});
   }
 };

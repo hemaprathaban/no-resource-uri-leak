@@ -13,6 +13,8 @@ const {XPCOMUtils} = require ('resource://gre/modules/XPCOMUtils.jsm');
 
 const domains = new Set; // disallowed domains: any if empty
 const isDenied = domain => 1 > domains.size || domains.has ('' + domain);
+let allowChromeURIs = true;
+
 const policy = {__proto__: null
   /* nsISupports */
   ,QueryInterface: XPCOMUtils.generateQI (['nsIContentPolicy', 'nsIFactory'])
@@ -28,12 +30,20 @@ const policy = {__proto__: null
   /* nsIContentPolicy */
   ,shouldLoad (typeCode, uri, originUri, node, expectedMime, extra, principal) {
     if (!uri || !uri.schemeIs ('resource') || !originUri
-      || originUri.schemeIs ('chrome') || originUri.schemeIs ('resource')){
-      return Ci.nsIContentPolicy.ACCEPT;
+      || originUri.schemeIs ('chrome') || originUri.schemeIs ('resource')) {
+      
+      if (allowChromeURIs || !uri.schemeIs ('chrome')) {
+        return Ci.nsIContentPolicy.ACCEPT;
+      }
     }
     
     // Non-matching domain or a resource directly loaded into a tab
     if (!isDenied (uri.host) || Ci.nsIContentPolicy.TYPE_DOCUMENT === typeCode) {
+      return Ci.nsIContentPolicy.ACCEPT;
+    }
+    
+    // Whitelist about:addons (Add-ons compatibility)
+    if (originUri.schemeIs ('about') && 'addons' === originUri.path) {
       return Ci.nsIContentPolicy.ACCEPT;
     }
     
@@ -54,9 +64,17 @@ const init = (... args) => {
   const categoryManager = Cc['@mozilla.org/categorymanager;1']
     .getService (Ci.nsICategoryManager);
   
-  const resourceDomain = args.pop ();
-  //console.log ('domain:', resourceDomain);
-  resourceDomain && domains.add ('' + resourceDomain);
+  const {resourceDomain, blockChromeURIs} = args.pop ();
+  try {
+    if ('string' === typeof resourceDomain) throw void 0;
+    [... resourceDomain].forEach (domain => domains.add ('' + domain));
+  } catch (e) {
+    resourceDomain && domains.add ('' + resourceDomain);
+  }
+  
+  if (blockChromeURIs) {
+    allowChromeURIs = false;
+  }
   
   registrar.registerFactory (classId, description, contractId, policy);
   categoryManager.addCategoryEntry (category, contractId, contractId, false, true);

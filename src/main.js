@@ -27,7 +27,9 @@ vim: ts=4 noet ai */
 
 // Stop all access attempts to resource:// URIs from the Web
 const filteredDomain = void 0; // everything
+const blockChromeURIs = !!require ('sdk/simple-prefs').prefs.blockChromeURIs;
 
+console.log (require ('sdk/simple-prefs').prefs);
 // The core code is under MPL-2.0
-require ('./resource-filter/init').addFilter (filteredDomain);
+require ('./resource-filter/init').addFilter (filteredDomain, blockChromeURIs);
 
