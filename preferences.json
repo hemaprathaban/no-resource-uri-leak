@@ -1,9 +1,57 @@
 [
 	{
-		"name": "blockChromeURIs"
+		"name": "uri.resource.enableBlocking"
+		,"type": "bool"
+		,"value": true
+		,"title": "Block access to resource:// URIs from Web"
+		,"description": "This is the extesion's main feature."
+	}
+	,{
+		"name": "uri.chrome.enableBlocking"
+		,"type": "bool"
+		,"value": true
+		,"title": "Block Web-exposed subset of chrome:// URIs"
+		,"description": "RECOMMENDED for privacy. Enabling it may break certain extensions or badly designed Web sites."
+	}
+	,{
+		"name": "redirect.enableMasking"
+		,"type": "bool"
+		,"value": true
+		,"title": "Uniformly filter disallowed redirects"
+		,"description": "This eliminates one known source of an information leak"
+	}
+	,{
+		"name": "uri.resource.exposedList"
+		,"type": "string"
+		,"value": ""
+		,"title": "Exposed resource:// domains"
+		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with spaces and/or commas)"
+	}
+	,{
+		"name": "uri.chrome.exposedList"
+		,"type": "string"
+		,"value": ""
+		,"title": "Exposed chrome:// domains"
+		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with spaces and/or commas)"
+	}
+	,{
+		"name": "uri.about.restricted"
 		,"type": "bool"
 		,"value": false
-		,"title": "Block Web-exposed subset of chrome:// URIs"
-		,"description": "Enabling it may break certain extensions or badly designed Web sites. (Requires a restart)"
+		,"title": "Restrict about: pages by default (for paranoids)"
+		,"description": "This may break certain add-ons or the browser's internal pages"
+	}
+	,{
+		"name": "debug.enabled"
+		,"type": "bool"
+		,"value": false
+		,"title": "Enable debugging messages (for hackers)"
+	}
+	,{
+		"name": "control.update"
+		,"type": "control"
+		,"label": "Update"
+		,"title": "Update the policy"
+		,"description": "Push this button for changes to take effect."
 	}
 ]

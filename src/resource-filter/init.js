@@ -1,25 +1,30 @@
-/* -*- indent-tabs-mode: nil; js-indent-level: 2 -*-
+/* -*- indent-tabs-mode: nil; js-indent-level: 2; tab-width: 2 -*-
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* ResourceFilter: A direct workaround for https://bugzil.la/863246 */
+/*
+  ResourceFilter: A direct workaround for https://bugzil.la/863246
+  API revision: 2
+*/
+
+const setPolicy = (() => {
+  try {
+    const {processes, remoteRequire} = require ('sdk/remote/parent');
+    remoteRequire ('./process/filter', module);
+    // For every current and future process
+    return options =>
+      processes.forEvery (process => void process.port.emit ('setPolicy', options));
+  } catch (e) {
+    // Not multiprocess
+    return require ('./process/filter').setPolicy;
+  }
+}) ();
+
 
 /**
   Prevents content from loading resource:// URIs without breaking add-ons.
-  @param resourceDomain (optional) e.g. 'gre' for resource://gre/
-  @param blockChromeURIs (optional) set to block chrome:// resources
+  Can be called multiple times to update the policy.
 */
-exports.addFilter = (resourceDomain, blockChromeURIs) => {
-  try {
-    const {processes, remoteRequire} = require ('sdk/remote/parent');
-    remoteRequire ('./content-policy', module);
-    
-    // For every current and future process
-    processes.forEvery (process => void process.port.emit ('init'
-        , {resourceDomain, blockChromeURIs}));
-  } catch (e) {
-    // Not multiprocess
-    require ('./content-policy').init ({resourceDomain, blockChromeURIs});
-  }
-};
+exports.enablePolicy = options => void setPolicy (options || {});
+

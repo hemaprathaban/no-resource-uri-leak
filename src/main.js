@@ -25,11 +25,33 @@ vim: ts=4 noet ai */
 
 'use strict';
 
-// Stop all access attempts to resource:// URIs from the Web
-const filteredDomain = void 0; // everything
-const blockChromeURIs = !!require ('sdk/simple-prefs').prefs.blockChromeURIs;
+// We are using a library under MPL-2.0 here
+const {enablePolicy} = require ('./resource-filter/init');
 
-console.log (require ('sdk/simple-prefs').prefs);
-// The core code is under MPL-2.0
-require ('./resource-filter/init').addFilter (filteredDomain, blockChromeURIs);
+
+/* Preferences keys */
+const PREF_REDIRECT_MASKED = 'redirect.enableMasking';
+const PREF_URI_RESOURCE_BLOCKED = 'uri.resource.enableBlocking';
+const PREF_URI_CHROME_BLOCKED = 'uri.chrome.enableBlocking';
+const PREF_URI_CHROME_WHITELIST = 'uri.chrome.exposedList';
+const PREF_URI_RESOURCE_WHITELIST = 'uri.resource.exposedList';
+const PREF_RESTRICT_ABOUT = 'uri.about.restricted';
+const PREF_DEBUG_ENABLED = 'debug.enabled';
+
+const _$prefs = require ('sdk/simple-prefs').prefs;
+
+const update = $prefs => enablePolicy ({__proto__: null
+	,enableDebug: !!$prefs[PREF_DEBUG_ENABLED]
+	,blockResourceURIs: !!$prefs[PREF_URI_RESOURCE_BLOCKED]
+	,blockChromeURIs: !!$prefs[PREF_URI_CHROME_BLOCKED]
+	,enableRedirectMasking: !!$prefs[PREF_REDIRECT_MASKED]
+	,restrictAboutPages: !!$prefs[PREF_RESTRICT_ABOUT]
+	,exposedResourceDomains:
+		String ($prefs[PREF_URI_RESOURCE_WHITELIST]).split (/[,\s]+/)
+	,exposedChromeDomains:
+		String ($prefs[PREF_URI_CHROME_WHITELIST]).split (/[,\s]+/)
+});
+
+update (_$prefs);
+require ('sdk/simple-prefs').on ('control.update', () => void update (_$prefs));
 
