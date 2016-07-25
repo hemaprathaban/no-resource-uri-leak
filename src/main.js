@@ -40,6 +40,11 @@ const PREF_DEBUG_ENABLED = 'debug.enabled';
 
 const _$prefs = require ('sdk/simple-prefs').prefs;
 
+const extractListItems = str =>
+	(items =>
+		(items[items.length - 1] || items.length--, items))
+		(String (str).split (/\s*,\s*/));
+
 const update = $prefs => enablePolicy ({__proto__: null
 	,enableDebug: !!$prefs[PREF_DEBUG_ENABLED]
 	,blockResourceURIs: !!$prefs[PREF_URI_RESOURCE_BLOCKED]
@@ -47,9 +52,9 @@ const update = $prefs => enablePolicy ({__proto__: null
 	,enableRedirectMasking: !!$prefs[PREF_REDIRECT_MASKED]
 	,restrictAboutPages: !!$prefs[PREF_RESTRICT_ABOUT]
 	,exposedResourceDomains:
-		String ($prefs[PREF_URI_RESOURCE_WHITELIST]).split (/[,\s]+/)
+		extractListItems ($prefs[PREF_URI_RESOURCE_WHITELIST])
 	,exposedChromeDomains:
-		String ($prefs[PREF_URI_CHROME_WHITELIST]).split (/[,\s]+/)
+		extractListItems ($prefs[PREF_URI_CHROME_WHITELIST])
 });
 
 update (_$prefs);
