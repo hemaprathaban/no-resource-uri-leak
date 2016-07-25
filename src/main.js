@@ -31,8 +31,8 @@ const {enablePolicy} = require ('./resource-filter/init');
 
 /* Preferences keys */
 const PREF_REDIRECT_MASKED = 'redirect.enableMasking';
-const PREF_URI_RESOURCE_BLOCKED = 'uri.resource.enableBlocking';
-const PREF_URI_CHROME_BLOCKED = 'uri.chrome.enableBlocking';
+const PREF_URI_RESOURCE_BLOCKED = 'uri.resource.blocking.enabled';
+const PREF_URI_CHROME_BLOCKED = 'uri.chrome.blocking.enabled';
 const PREF_URI_CHROME_WHITELIST = 'uri.chrome.exposedList';
 const PREF_URI_RESOURCE_WHITELIST = 'uri.resource.exposedList';
 const PREF_RESTRICT_ABOUT = 'uri.about.restricted';

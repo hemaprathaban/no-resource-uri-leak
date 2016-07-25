@@ -22,7 +22,7 @@
 addon_id="no-resource-uri-leak"
 
 # Canonical version of the addon (may be converted into different formats on build)
-addon_version="1.0.1"
+addon_version="1.1.0"
 
 # Alpha versions (may not be feature complete): x.y.z~a1, x.y.z~a2, ...
 # Beta versions (feature-frozen): x.y.z~b1, x.y.z~b2, ...

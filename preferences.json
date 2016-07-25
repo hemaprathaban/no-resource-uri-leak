@@ -1,15 +1,15 @@
 [
 	{
-		"name": "uri.resource.enableBlocking"
+		"name": "uri.resource.blocking.enabled"
 		,"type": "bool"
 		,"value": true
 		,"title": "Block access to resource:// URIs from Web"
 		,"description": "This is the extesion's main feature."
 	}
 	,{
-		"name": "uri.chrome.enableBlocking"
+		"name": "uri.chrome.blocking.enabled"
 		,"type": "bool"
-		,"value": true
+		,"value": false
 		,"title": "Block Web-exposed subset of chrome:// URIs"
 		,"description": "RECOMMENDED for privacy. Enabling it may break certain extensions or badly designed Web sites."
 	}
@@ -25,14 +25,14 @@
 		,"type": "string"
 		,"value": ""
 		,"title": "Exposed resource:// domains"
-		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with spaces and/or commas)"
+		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with commas)"
 	}
 	,{
 		"name": "uri.chrome.exposedList"
 		,"type": "string"
 		,"value": ""
 		,"title": "Exposed chrome:// domains"
-		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with spaces and/or commas)"
+		,"description": "This may harm your privacy: Only for debugging and as temporary measures (Separated with commas)"
 	}
 	,{
 		"name": "uri.about.restricted"
@@ -46,6 +46,7 @@
 		,"type": "bool"
 		,"value": false
 		,"title": "Enable debugging messages (for hackers)"
+		,"description": "Enable this and copy-and-paste the contents of Developer > Browser Console when you report a problem."
 	}
 	,{
 		"name": "control.update"
