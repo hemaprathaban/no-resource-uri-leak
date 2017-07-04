@@ -1,0 +1,9 @@
+no-resource-uri-leak (1.1.0-1) unstable; urgency=medium
+
+  * Initial release for Debian.
+  * Imported Upstream version 1.1.0
+  * debian/control:
+    + Set the maintainer to be the mozext team.
+    + Make build-dependency on mozilla-devscripts unversioned.
+
+ -- Hema Prathaban <hemaklnce@gmail.com>  Tue, 04 Jul 2017 02:51:17 -0400

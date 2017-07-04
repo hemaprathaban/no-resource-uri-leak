@@ -1,0 +1,28 @@
+Source: no-resource-uri-leak
+Section: web
+Priority: optional
+Maintainer: Debian Mozilla Extension Maintainers <pkg-mozext-maintainers@lists.alioth.debian.org>
+Uploaders: Hema Prathaban <hemaklnce@gmail.com>
+Build-Depends: debhelper (>= 9),
+ mozilla-devscripts,
+ librsvg2-bin,
+ xsltproc,
+ imagemagick,
+ jpm.sh
+Standards-Version: 3.9.8
+Homepage: https://notabug.org/desktopd/no-resource-uri-leak
+Vcs-Git: https://anonscm.debian.org/cgit/collab-main/no-resource-uri-leak.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/no-resource-uri-leak.git
+
+Package: xul-ext-no-resource-uri-leak
+Architecture: all
+Depends: ${misc:Depends},${xpi:Depends}
+Recommends: ${xpi:Recommends}
+Enhances: ${xpi:Enhances}
+Provides: ${xpi:Provides}
+Breaks: ${xpi:Breaks}
+Description: extension is to deny resource access to web 
+ no-resource-uri-leak is to deny resource:// access to Web content,
+ it fills the hole to defend against fingerprinting.
+ . 
+ It uses nsIContent Policy to selectively filter resource:// access.
