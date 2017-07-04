@@ -45,7 +45,7 @@ builds_dir = ./builds
 branding_src_dir = ./branding
 src_dir = ./src
 version_info_path = ./version_info
-git_submodule_jpm_sh = ./tools/jpm.sh
+git_submodule_jpm_sh = /usr/share/jpm.sh
 addon_path = $(builds_dir)/latest
 
 
