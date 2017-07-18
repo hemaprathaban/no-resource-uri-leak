@@ -3,3 +3,6 @@
 	dh $@
 override_dh_auto_build:
 	make branding
+override_dh_auto_install:
+	    find . -name "COPYING" -delete
+	    dh_auto_install

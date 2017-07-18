@@ -9,18 +9,22 @@ Build-Depends: debhelper (>= 9),
  xsltproc,
  imagemagick,
  jpm.sh
-Standards-Version: 4.0.0
+Standards-Version: 3.9.8
 Homepage: https://notabug.org/desktopd/no-resource-uri-leak
 Vcs-Git: https://anonscm.debian.org/git/pkg-mozext/no-resource-uri-leak.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-mozext/no-resource-uri-leak.git
 
 Package: xul-ext-no-resource-uri-leak
 Architecture: all
-Depends: ${misc:Depends},${xpi:Depends}
-Recommends: ${xpi:Recommends}
-Enhances: ${xpi:Enhances}
-Provides: ${xpi:Provides}
-Breaks: ${xpi:Breaks}
+Depends: 
+ ${misc:Depends},
+ ${xpi:Depends}
+Recommends: 
+ ${xpi:Recommends}
+Enhances: 
+ ${xpi:Enhances}
+Provides: 
+ ${xpi:Provides}
 Description: extension is to deny resource access to web 
  no-resource-uri-leak is to deny resource:// access to Web content,
  it fills the hole to defend against fingerprinting.
